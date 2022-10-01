@@ -47,5 +47,6 @@ The program that will store some notes, story, and idea
 - ## passport
     - For Authencation
     - It used to make login and logout with account like google, facebook, github.
+    
     > You can make your local account system yourselves but passportJS is minimal in their documentation so their function seems like magical to you, and hard to maintance because lack of documentation in official website
 
