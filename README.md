@@ -37,9 +37,11 @@ The program that will store some notes, story, and idea
 - ## morgan
     - Express Logger
     - Used to log HTTP requests and errors, and simplifies the process
+    - Outputing status code, method, time takes to finished executing and target of router
 - ## mongoose
     - mongodb tools for Object Data Modeling
-    - Using promise 
+    - Async model
+    - Used to connect MongoDB and get host name
 - ## passport
     - For Authencation
 
