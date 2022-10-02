@@ -25,6 +25,7 @@ router.get('/dashboard',
     },
     (req,res)=>{//The next function
     // const user = model.findOne({_id:req.user.id})
+    console.log(req.user)
     res.render('dashboard',{name:req.user.firstName})
 })
 

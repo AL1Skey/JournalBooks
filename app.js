@@ -1,13 +1,15 @@
 // Load Depedencies
 const path = require('path')
 const express = require('express')
-const mongoose = require('mongoose')
 const handlebar = require('express-handlebars')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
-const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo')
+
+// load Database
+const connectDB = require('./config/db')
 
 // Load config 
 dotenv.config({path:'./config/config.env'})
@@ -15,9 +17,6 @@ dotenv.config({path:'./config/config.env'})
 // Passport config
 // Load passport module as argument to passport config
 require('./config/passport')(passport)
-
-// load Database
-const connectDB = require('./config/db')
 
 // Connect To MongoDB
 connectDB()
@@ -37,23 +36,22 @@ app.engine('.hbs', handlebar.engine({defaultLayout:'main' ,extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 // Set Session
+// const mongoDBStore = new MongoDBStore({
+//   uri:process.env.MONGO_URI,
+//   collection:'mySessions',
+
+// })
+
 app.use(session({
     secret: 'keyboard cat',
     resave: false,// 
     saveUninitialized: false,// Dont create session until something is stored
-    // cookie: { secure: true },
     store: MongoStore.create({
-      mongoUrl:process.env.MONGO_URI
-    })
+      mongoUrl : process.env.MONGO_URI,
+    }),
+    // cookie: { secure: true },
     
   }))
-
-// Set Global variable
-app.use(function(req,res,next){
-  res.locals.user = req.user || null
-  console.log(req.user)
-  next()
-}) 
 
 // Set Passport middleware
 app.use(passport.initialize())

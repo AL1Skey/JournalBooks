@@ -37,7 +37,8 @@ module.exports = function(passport){
 
     // To make the user not logged out when the page refresh
 
-    //Serialize User
+    // Serialize User
+    // store the callback object to MongoDB(store token)
     passport.serializeUser((user,callback) =>{
       process.nextTick(() =>{
         return callback(null, {
@@ -49,9 +50,13 @@ module.exports = function(passport){
     });
 
     // Deserialize User
-    passport.deserializeUser((user,callback) =>{
-      process.nextTick(() =>{
-        return callback(null, user);
-      });
-    });
+    // Find user by id from serializeUser and initialize data that found to request parameter used by router
+    // name the access data as user
+    // in router to get data like firstName or familyName = req.user.firstName
+    passport.deserializeUser((users, callback) => {
+      User.findById(users.id, (err, user) =>{
+        process.nextTick(()=>
+        callback(err, user))
+      })
+    })
 }
