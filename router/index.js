@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {ensureAuth,ensureGuest} = require('./../middleware/auth');
-const model = require('../models/User')
+const Journal = require('../models/Journal');
 // @desc    /login
 // @route   GET
 router.get('/',
@@ -15,18 +15,28 @@ router.get('/',
 // @desc    /dashboard
 // @route   GET
 router.get('/dashboard',
-    (req,res,next)=>{//Set if the user haven't login, they will redirect to login page,else go to next function 
-        if(req.isAuthenticated()){
-            return next()
-        }
-        else{
-            res.redirect('/')
-        }
-    },
-    (req,res)=>{//The next function
-    // const user = model.findOne({_id:req.user.id})
-    console.log(req.user)
-    res.render('dashboard',{name:req.user.firstName})
+    // (req,res,next)=>{//Set if the user haven't login, they will redirect to login page,else go to next function 
+    //     if(req.isAuthenticated()){
+    //         return next()
+    //     }
+    //     else{
+    //         res.redirect('/')
+    //     }
+    // },
+    ensureAuth,
+    async (req,res)=>{//The next function
+    try {
+        const journalModel = await Journal.find({user:req.user.id}).lean()// find collection of journal based of user id and convert it to javascript object
+
+        console.log(req.ip)
+        res.render('dashboard',{
+            name:req.user.firstName,
+            journal:journalModel,
+        })
+    } catch (error) {
+        
+    }
+        
 })
 
 module.exports = router

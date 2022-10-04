@@ -1,2 +1,43 @@
 <h6>Dashboard</h6>
 <h3>Welcome {{name}}</h3>
+
+{{#if journal}}
+    <h4 class="ml">Your Journal:</h4>
+    <table class="stripped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each journal}}
+            <tr>
+                <td><a href="/journal/{{_id}}">{{title}}</a></td>
+                <td>{{formatDate createdAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</td> {{!-- Syntax helpers parameter  --}}
+                <td>{{status}}</td>
+                <td>{{{editIcon ../user user _id false }}}</td>
+                <td>
+                    <button data-target="{{_id}}" class="waves-effect waves-light btn red modal-trigger"><i class="fa fa-trash"></i></button>
+
+                    <form action="/journal/{{_id}}" method="POST" id="{{_id}}" class="modal">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <div class="modal-content">
+                        <p>Do You Really want to delete this journal named {{title}} ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn red"> Yes </button>
+                        <a href="#!" class="btn green modal-close"> No </a>
+                    </div>
+                </form>
+                </td>
+                
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <p>You haven't publish your Journal</p>
+{{/if}}
