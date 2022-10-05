@@ -8,7 +8,7 @@ The program that will store some notes, story, and idea
  > npm run dev
 - To start the production mode,
  > npm run start
- 
+
 
 # Depedencies
 -    "connect-mongo": "^4.6.0",
@@ -41,6 +41,7 @@ The program that will store some notes, story, and idea
 - ## method-override
     - Let you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it
     - > It allow to use PUT and DELETE from our template
+    - > Because form only use POST and GET, using method-override you can replace the method with PUT or DELETE so you can use PUT and DELETE request in your router.
 - ## moment
     - to print time
 - ## mongodb
@@ -53,6 +54,7 @@ The program that will store some notes, story, and idea
     - mongodb tools for Object Data Modeling
     - Async model
     - Used to connect MongoDB and get host name
+    - Used to make Model Scheme, Adding, Delete and Updating MongoDB
 - ## passport
     - For Authencation
     - It used to make login and logout with account like google, facebook, github.
