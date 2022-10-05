@@ -1,5 +1,5 @@
 {
-  "name": "JournalBooks",
+  "name": "journalbooks",
   "version": "1.0.0",
   "description": "The program that store some story/journal",
   "main": "app.js",
