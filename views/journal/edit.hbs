@@ -1,0 +1,39 @@
+<h3>Edit Journal</h3>
+<div class="row">
+    <form action="/journal/{{journal._id}}" method="POST" class="col s12">
+    <input type="hidden" name="_method" value="PUT"><!-- Override POST method with PUT method to avoid data duplication with POST request-->
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="title" name="title" value="{{journal.title}}">
+                <label for="title">Title</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <select id="status" name="status">
+                    {{#if (compare journal.status "public")}}
+                    <option value="public" selected>Public</option>
+                    <option value="private">Private</option>
+                    {{else}}
+                    <option value="public" >Public</option>
+                    <option value="private" selected>Private</option>
+                    {{/if}}
+                </select>
+                <label for="status">Status</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <h5>Write something here:</h5>
+                <textarea id="body" name="body" >{{journal.body}}</textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Save" class="btn">
+            <a href="/dashboard" class="btn orange">Cancel</a>
+        </div>
+    </form>
+</div>
