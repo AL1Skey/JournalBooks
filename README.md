@@ -1,6 +1,15 @@
 # JournalBooks
 The program that will store some notes, story, and idea
 
+# How To use
+- Install all depedencies
+ > npm i 
+- To start the development mode, 
+ > npm run dev
+- To start the production mode,
+ > npm run start
+ 
+
 # Depedencies
 -    "connect-mongo": "^4.6.0",
 -    "dotenv": "^16.0.2",
